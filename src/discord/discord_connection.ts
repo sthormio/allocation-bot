@@ -7,7 +7,7 @@ export default class AllocationBot {
         return this._client;
     }
 
-    static start() {
+    static start(): void {
         this._client = new Client();
 
         this._client.login(

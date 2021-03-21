@@ -1,27 +1,25 @@
 
 import { CommandMessage } from '@typeit/discord';
 import { Command, CommandNotFound, Discord, On } from '@typeit/discord/decorators';
-import { MessageOptions } from 'discord.js';
 import { openBrowser, closeBrowser, openNewAllocationPage } from '../../puppetter/puppetter';
 import AllocationLogo from '../../utils/allocation_logo'
-import AllocationBot from "../discord_connection"
 
 @Discord("!")
 abstract class AllocationBotEvents {
     @On("ready")
-    async onReady() {
+    async onReady(): Promise<void> {
         await openBrowser()
         console.log("AllocationBot is Online ✅");
     }
 
     @On("disconnect")
-    onDisconnect() {
+    onDisconnect(): void {
         console.log("AllocationBot is Offline ❌")
         closeBrowser();
     }
 
     @CommandNotFound()
-    notFound(message: CommandMessage) {
+    notFound(message: CommandMessage): void {
         if (message.author.bot) return;
         if (message.channel.type === "dm") return;
         message.reply("Este comando não foi encontrado 😓. Digite !help para ver os comandos disponíveis")
@@ -29,7 +27,7 @@ abstract class AllocationBotEvents {
 
 
     @Command("help")
-    helpCommand(message: CommandMessage) {
+    helpCommand(message: CommandMessage): void {
         if (message.author.bot) return;
         if (message.channel.type === "dm") return;
         message.channel.send(AllocationLogo())
@@ -41,7 +39,7 @@ abstract class AllocationBotEvents {
     }
 
     @Command("on")
-    async insertAllocation(message: CommandMessage) {
+    async insertAllocation(message: CommandMessage): Promise<void> {
 
         if (message.author.bot) return;
         if (message.channel.type === "dm") return;

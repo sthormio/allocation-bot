@@ -4,15 +4,15 @@ import AllocationProps from "../interfaces/allocation_props";
 let browser: Browser;
 
 
-export async function openBrowser() {
+export async function openBrowser(): Promise<void> {
     browser = await launch({ headless: true });
 }
 
-export async function closeBrowser() {
+export async function closeBrowser(): Promise<void> {
     browser.close();
 }
 
-export async function openNewAllocationPage(data: AllocationProps) {
+export async function openNewAllocationPage(data: AllocationProps): Promise<void> {
 
     if (browser != null) {
         const page = await browser.newPage();
@@ -30,7 +30,7 @@ export async function openNewAllocationPage(data: AllocationProps) {
     }
 }
 
-function getTodayDate() {
+function getTodayDate(): string {
     let today = "";
     const date = new Date();
 
@@ -39,14 +39,14 @@ function getTodayDate() {
     return today
 }
 
-async function insertNewRow(page: Page) {
+async function insertNewRow(page: Page): Promise<void> {
     const menuDocsInsert = await page.$("#docs-insert-menu")
     await menuDocsInsert?.click();
     const insertRow = await page.$("#\\:5c")
     await insertRow?.click()
 }
 
-async function insertProperties(page: Page, inputText: string) {
+async function insertProperties(page: Page, inputText: string): Promise<void> {
     const cellInput = await page.$(".cell-input")
     await cellInput?.click()
     await new Promise(resolve => setTimeout(resolve, 200));

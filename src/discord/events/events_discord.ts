@@ -1,7 +1,7 @@
 
 import { CommandMessage } from '@typeit/discord';
 import { Command, CommandNotFound, Discord, On } from '@typeit/discord/decorators';
-import { openBrowser, closeBrowser, openNewAllocationPage } from '../../puppetter/puppetter';
+import { openBrowser, closeBrowser, openNewAllocationPage } from '../../puppetter/puppeteer';
 import AllocationLogo from '../../utils/allocation_logo'
 
 @Discord("!")

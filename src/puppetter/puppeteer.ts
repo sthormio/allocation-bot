@@ -5,7 +5,13 @@ let browser: Browser;
 
 
 export async function openBrowser(): Promise<void> {
-    browser = await launch({ headless: true });
+    browser = await launch({
+        headless: true,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+        ]
+    });
 }
 
 export async function closeBrowser(): Promise<void> {

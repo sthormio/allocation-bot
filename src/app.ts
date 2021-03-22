@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-
 dotenv.config();
 import AllocationBot from './discord/discord_connection'
 
@@ -10,7 +9,7 @@ try {
     server.listen(process.env.PORT || 3000)
 
     server.get('/', (req, res) => {
-        res.json({ allocation_bot: "Online" })
+        res.json({ allocation_bot: "Online ✅" })
     })
 
 } catch (error) {

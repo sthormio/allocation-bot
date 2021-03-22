@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "start": "node src/utils/build_project.js",
+    "start": "tsc --build && node build/app.js",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/app.ts"
   },
   "dependencies": {
@@ -14,12 +14,10 @@
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "puppeteer": "^8.0.0",
-    "shelljs": "^0.8.4",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
     "@types/puppeteer": "^5.4.3",
-    "@types/shelljs": "^0.8.8",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.3"
   }

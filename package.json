@@ -13,10 +13,12 @@
     "@typeit/discord": "^4.0.9",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "puppeteer": "^8.0.0",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.11",
     "@types/puppeteer": "^5.4.3",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.3"

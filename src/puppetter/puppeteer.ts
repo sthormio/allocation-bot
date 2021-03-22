@@ -1,12 +1,13 @@
 import { Browser, launch, Page } from "puppeteer";
 import AllocationProps from "../interfaces/allocation_props";
 
-let browser: Browser;
+export let browser: Browser;
 
 
 export async function openBrowser(): Promise<void> {
+
     browser = await launch({
-        headless: true,
+        headless: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -57,6 +58,10 @@ async function insertProperties(page: Page, inputText: string): Promise<void> {
     await cellInput?.click()
     await new Promise(resolve => setTimeout(resolve, 200));
     const input = await page.$("#t-formula-bar-input span")
+    if (input == null) {
+        page.close();
+        throw new Error()
+    }
     await input?.type(inputText, { delay: 200 });
     await page.keyboard.press("Tab")
 }

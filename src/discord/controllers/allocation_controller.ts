@@ -1,6 +1,7 @@
 import { CommandMessage } from "@typeit/discord";
 import projects from "../../utils/projects";
-import AllocationLogo from '../../utils/allocation_logo';
+import usernames from "../../utils/usernames";
+import { allocationLogoMobile } from '../../utils/allocation_logo';
 import { closeBrowser, openBrowser, openNewAllocationPage } from "../../puppetter/puppeteer";
 
 export default class AllocationController {
@@ -38,7 +39,7 @@ export default class AllocationController {
     public helpCommand(message: CommandMessage): void {
         if (message.author.bot) return;
         if (message.channel.type === "dm") return;
-        message.channel.send(AllocationLogo())
+        message.channel.send(allocationLogoMobile())
         message.channel.send(
             `📝 COMMANDS:
              ✅ !on + project + hours => Adicionar sua alocação
@@ -58,26 +59,33 @@ export default class AllocationController {
 
             const content = message.content.split(" ")
 
+            console.log(content)
+
             if (this.validateFieldsLenght(content)) {
-                message.reply("Informe o projeto e as horas (separadas por espaço) para adicionar sua alocação. Ex: !on Artbit 8")
+                message.reply("Informe o projeto e as horas (separadas por espaço) para adicionar sua alocação. Ex: !on Bruno Artbit 8")
                 return;
             }
 
-            if (this.validateProjects(content[1])) {
+            if (this.validateUsername(content[1])) {
+                message.reply(`Escolha um dos nomes listados: 📝${usernames.map(username => `\n${username}`)}`)
+                return;
+            }
+
+            if (this.validateProjects(content[2])) {
                 message.reply(`Escolha um dos projetos listados: 📝${projects.map(project => `\n${project}`)}`)
                 return;
             }
 
-            if (this.validateNumbersOfHours(content[2])) {
+            if (this.validateNumbersOfHours(content[3])) {
                 message.reply("Informe o números de horas entre 1 e 8")
                 return;
             }
 
 
             const data = {
-                "username": message.author.username,
-                "project": content[1],
-                "hours": content[2],
+                "username": content[1],
+                "project": content[2],
+                "hours": content[3],
             }
 
             try {
@@ -95,7 +103,7 @@ export default class AllocationController {
 
 
     private validateFieldsLenght(content: string[]): boolean {
-        if ((content.length <= 1 || content.length <= 2) || content.length > 3) {
+        if ((content.length <= 1 || content.length <= 3) || content.length > 4) {
             return true;
         } else {
             return false;
@@ -104,6 +112,14 @@ export default class AllocationController {
 
     private validateProjects(content: string): boolean {
         if (!projects.includes(content)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private validateUsername(content: string): boolean {
+        if (!usernames.includes(content)) {
             return true;
         } else {
             return false;

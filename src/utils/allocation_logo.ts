@@ -1,8 +1,16 @@
-const allocationLogo = (): string => {
+export const allocationLogo = (): string => {
     return `
 ▄▀█ █░░ █░░ █▀█ █▀▀ ▄▀█ ▀█▀ █ █▀█ █▄░█   █▄▄ █▀█ ▀█▀
 █▀█ █▄▄ █▄▄ █▄█ █▄▄ █▀█ ░█░ █ █▄█ █░▀█   █▄█ █▄█ ░█░
 `;
 }
 
-export default allocationLogo;
+export const allocationLogoMobile = (): string => {
+    return `
+▄▀█ █░░ █░░ █▀█ █▀▀ ▄▀█ ▀█▀ █ █▀█ █▄░█
+█▀█ █▄▄ █▄▄ █▄█ █▄▄ █▀█ ░█░ █ █▄█ █░▀█
+
+                █▄▄ █▀█ ▀█▀
+                █▄█ █▄█ ░█░
+`;
+}

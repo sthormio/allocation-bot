@@ -57,7 +57,9 @@ export default class AllocationController {
 
         if (message.channel.name === "routines") {
 
-            const content = message.content.split(" ")
+            // const content = message.content.split("")
+            const rawContent = message.content.split("--obs")
+            const content = rawContent[0].split(" ")
 
             console.log(content)
 
@@ -86,6 +88,7 @@ export default class AllocationController {
                 "username": content[1],
                 "project": content[2],
                 "hours": content[3],
+                "obs": rawContent[1] !== "" ? rawContent[1].trim() : false,
             }
 
             try {
@@ -103,7 +106,7 @@ export default class AllocationController {
 
 
     private validateFieldsLenght(content: string[]): boolean {
-        if ((content.length <= 1 || content.length <= 3) || content.length > 4) {
+        if ((content.length <= 1 || content.length <= 4) || content.length > 5) {
             return true;
         } else {
             return false;

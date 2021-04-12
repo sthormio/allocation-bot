@@ -1,6 +1,5 @@
 import { CommandMessage } from "@typeit/discord";
 import projects from "../../utils/projects";
-import usernames from "../../utils/usernames";
 import { allocationLogoMobile } from '../../utils/allocation_logo';
 import { closeBrowser, openBrowser, openNewAllocationPage } from "../../puppetter/puppeteer";
 
@@ -57,46 +56,50 @@ export default class AllocationController {
 
         if (message.channel.name === "routines") {
 
-            // const content = message.content.split("")
+
             const rawContent = message.content.split("--obs")
             const content = rawContent[0].split(" ")
 
-            console.log(content)
+            if (message.content.includes('--obs')) {
+                content.pop();
+            }
+
 
             if (this.validateFieldsLenght(content)) {
-                message.reply("Informe o projeto e as horas (separadas por espaço) para adicionar sua alocação. Ex: !on Bruno Artbit 8")
+                message.reply("Informe o projeto e as horas (separadas por espaço) para adicionar sua alocação. Ex: !on Artbit 8")
                 return;
             }
 
-            if (this.validateUsername(content[1])) {
-                message.reply(`Escolha um dos nomes listados: 📝${usernames.map(username => `\n${username}`)}`)
-                return;
-            }
-
-            if (this.validateProjects(content[2])) {
+            if (this.validateProjects(content[1])) {
                 message.reply(`Escolha um dos projetos listados: 📝${projects.map(project => `\n${project}`)}`)
                 return;
             }
 
-            if (this.validateNumbersOfHours(content[3])) {
+            if (this.validateNumbersOfHours(content[2])) {
                 message.reply("Informe o números de horas entre 1 e 8")
                 return;
             }
 
 
             const data = {
-                "username": content[1],
-                "project": content[2],
-                "hours": content[3],
-                "obs": rawContent[1] !== "" ? rawContent[1].trim() : false,
+                "username": message.author.username,
+                "project": content[1],
+                "hours": content[2],
+                "obs": rawContent.length === 2 ? rawContent[1].trim() : false,
             }
 
             try {
+
+
+
+                message.reply("Estou adicionando sua alocação, por favor aguarde... ⏳")
+
                 await openNewAllocationPage(data)
+
                 message.reply("Sua Alocaçao foi adicionada 👊🏽")
 
             } catch (e) {
-                message.reply("Ocorreu um erro ao adicionar sua alocação 😓, tente novamente")
+                message.reply("Ocorreu um erro ao adicionar sua alocação 😓, poderia tentar novamente ?")
             }
         }
 
@@ -106,7 +109,7 @@ export default class AllocationController {
 
 
     private validateFieldsLenght(content: string[]): boolean {
-        if ((content.length <= 1 || content.length <= 4) || content.length > 5) {
+        if ((content.length <= 1 || content.length <= 2)) {
             return true;
         } else {
             return false;
@@ -115,14 +118,6 @@ export default class AllocationController {
 
     private validateProjects(content: string): boolean {
         if (!projects.includes(content)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private validateUsername(content: string): boolean {
-        if (!usernames.includes(content)) {
             return true;
         } else {
             return false;

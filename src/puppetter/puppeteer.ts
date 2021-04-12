@@ -32,6 +32,10 @@ export async function openNewAllocationPage(data: AllocationProps): Promise<void
         await insertProperties(page, data.project)
         await insertProperties(page, data.hours)
 
+        if (data.obs) {
+            await insertProperties(page, data.obs as string)
+        }
+
 
         setTimeout(() => page.close(), 200);
     }
@@ -55,6 +59,7 @@ async function insertNewRow(page: Page): Promise<void> {
 
 async function insertProperties(page: Page, inputText: string): Promise<void> {
     const cellInput = await page.$(".cell-input")
+    await new Promise(resolve => setTimeout(resolve, 200));
     await cellInput?.click()
     await new Promise(resolve => setTimeout(resolve, 200));
     const input = await page.$("#t-formula-bar-input span")

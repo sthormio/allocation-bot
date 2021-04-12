@@ -1,6 +1,6 @@
 import { CommandMessage } from "@typeit/discord";
 import projects from "../../utils/projects";
-import { allocationLogoMobile } from '../../utils/allocation_logo';
+import allocationLogoMobile from '../../utils/allocation_logo';
 import { closeBrowser, openBrowser, openNewAllocationPage } from "../../puppetter/puppeteer";
 
 export default class AllocationController {

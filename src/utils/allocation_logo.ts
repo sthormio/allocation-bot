@@ -1,11 +1,4 @@
-export const allocationLogo = (): string => {
-    return `
-▄▀█ █░░ █░░ █▀█ █▀▀ ▄▀█ ▀█▀ █ █▀█ █▄░█   █▄▄ █▀█ ▀█▀
-█▀█ █▄▄ █▄▄ █▄█ █▄▄ █▀█ ░█░ █ █▄█ █░▀█   █▄█ █▄█ ░█░
-`;
-}
-
-export const allocationLogoMobile = (): string => {
+const allocationLogoMobile = (): string => {
     return `
 ▄▀█ █░░ █░░ █▀█ █▀▀ ▄▀█ ▀█▀ █ █▀█ █▄░█
 █▀█ █▄▄ █▄▄ █▄█ █▄▄ █▀█ ░█░ █ █▄█ █░▀█
@@ -14,3 +7,5 @@ export const allocationLogoMobile = (): string => {
                 █▄█ █▄█ ░█░
 `;
 }
+
+export default allocationLogoMobile;

@@ -81,16 +81,19 @@ export default class AllocationController {
             }
 
 
+            let member = message.guild?.member(message.author);
+
+
+            console.log(member?.displayName);
+
             const data = {
-                "username": message.author.username,
+                "username": member?.displayName as string,
                 "project": content[1],
                 "hours": content[2],
                 "obs": rawContent.length === 2 ? rawContent[1].trim() : false,
             }
 
             try {
-
-
 
                 message.reply("Estou adicionando sua alocação, por favor aguarde... ⏳")
 
@@ -102,11 +105,7 @@ export default class AllocationController {
                 message.reply("Ocorreu um erro ao adicionar sua alocação 😓, poderia tentar novamente ?")
             }
         }
-
-
     }
-
-
 
     private validateFieldsLenght(content: string[]): boolean {
         if ((content.length <= 1 || content.length <= 2)) {

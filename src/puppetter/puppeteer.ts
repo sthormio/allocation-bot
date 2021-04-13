@@ -53,7 +53,7 @@ function getTodayDate(): string {
 async function insertNewRow(page: Page): Promise<void> {
     const menuDocsInsert = await page.$("#docs-insert-menu")
     await menuDocsInsert?.click();
-    const insertRow = await page.$("#\\:5d")
+    const insertRow = await page.$('span[aria-label="Linha abaixo b"]')
     await insertRow?.click()
 }
 

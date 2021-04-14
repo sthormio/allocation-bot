@@ -1,5 +1,5 @@
 
-import { CommandMessage } from '@typeit/discord';
+import { ArgsOf, CommandMessage } from '@typeit/discord';
 import { Command, CommandNotFound, Discord, On } from '@typeit/discord/decorators';
 import { openBrowser, closeBrowser, } from '../../puppetter/puppeteer';
 import AllocationLogo from '../../utils/allocation_logo';
@@ -39,5 +39,12 @@ abstract class AllocationBotEvents {
     @Command("on")
     insertAllocation(message: CommandMessage): void {
         this.allocationController.insertAllocation(message);
+    }
+
+    @On('message')
+    out(
+        message: ArgsOf<"message">,
+    ): void {
+        this.allocationController.genericCommands(message);
     }
 }

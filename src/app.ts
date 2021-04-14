@@ -9,7 +9,7 @@ try {
     AllocationBot.start();
     const server = express();
     server.listen(process.env.PORT || 3000, () => {
-        pingServer(1200000)
+        pingServer((25 * 60) * 100)
     })
 
     server.get('/', (req, res) => {
@@ -21,6 +21,7 @@ try {
 }
 
 async function pingServer(ms: number) {
+
     setTimeout(async () => {
         await axios.get("https://allocation-bot.herokuapp.com/")
         console.log("Ping server")

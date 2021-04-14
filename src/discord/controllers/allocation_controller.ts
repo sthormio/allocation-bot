@@ -15,13 +15,20 @@ export default class AllocationController {
     genericCommands(
         message: ArgsOf<"message">,
     ) {
-        if (message[0].content == 'out' || message[0].content == 'Out') {
-            message[0].reply("Tenha um bom descanso, nos vemos amanhã 👋🏽")
-        } else if (message[0].content == 'back' || message[0].content == 'Back') {
-            message[0].reply("Bem vindo de volta ao trabalho 👊🏼")
-        } else if (message[0].content == 'almoço' || message[0].content == 'Almoço') {
-            message[0].reply("Comer é bom né? 🍛 Vai lá recarregar as baterias")
+        if (message[0].author.bot) return;
+        if (message[0].channel.type === "dm") return;
+
+        if (message[0].channel.name === 'routines') {
+
+            if (message[0].content == 'out' || message[0].content == 'Out') {
+                message[0].reply("Tenha um bom descanso, nos vemos amanhã 👋🏽")
+            } else if (message[0].content == 'back' || message[0].content == 'Back') {
+                message[0].reply("Bem vindo de volta ao trabalho 👊🏼")
+            } else if (message[0].content == 'almoço' || message[0].content == 'Almoço') {
+                message[0].reply("Comer é bom né? 🍛 Vai lá recarregar as baterias")
+            }
         }
+
     }
 
 

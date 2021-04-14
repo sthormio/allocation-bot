@@ -22,7 +22,7 @@ try {
 
 async function pingServer(ms: number) {
     setTimeout(async () => {
-        // await axios.get("https://allocation-bot.herokuapp.com/")
+        await axios.get("https://allocation-bot.herokuapp.com/")
         console.log("Ping server")
         pingServer(ms);
     }, ms)

@@ -53,7 +53,8 @@ function getTodayDate(): string {
 async function insertNewRow(page: Page): Promise<void> {
     const menuDocsInsert = await page.$("#docs-insert-menu")
     await menuDocsInsert?.click();
-    const insertRow = await page.$("#\\:5d")
+    // const insertRow = await page.$("#\\:5e")
+    const insertRow = await page.$('span[aria-label="Row below b"]')
     await insertRow?.click()
 }
 
@@ -67,7 +68,7 @@ async function insertProperties(page: Page, inputText: string): Promise<void> {
         page.close();
         throw new Error()
     }
-    await input?.type(inputText, { delay: 200 });
+    await input?.type(inputText, { delay: 500 });
     await page.keyboard.press("Tab")
 }
 

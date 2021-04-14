@@ -80,9 +80,14 @@ export default class AllocationController {
                 return;
             }
 
+            let member = message.guild?.member(message.author);
+
+
+            console.log(member?.displayName);
+
 
             const data = {
-                "username": message.author.username,
+                "username": member?.displayName as string,
                 "project": content[1],
                 "hours": content[2],
                 "obs": rawContent.length === 2 ? rawContent[1].trim() : false,

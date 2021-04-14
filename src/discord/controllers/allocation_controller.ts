@@ -101,7 +101,7 @@ export default class AllocationController {
 
                 await openNewAllocationPage(data)
 
-                message.reply("Sua Alocaçao foi adicionada 👊🏽")
+                message.reply("Sua Alocação foi adicionada 👊🏽")
 
             } catch (e) {
                 message.reply("Ocorreu um erro ao adicionar sua alocação 😓, poderia tentar novamente ?")

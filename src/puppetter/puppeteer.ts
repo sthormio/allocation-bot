@@ -1,4 +1,4 @@
-import { Browser, launch, Page } from "puppeteer";
+import { Browser, ElementHandle, launch, Page } from "puppeteer";
 import AllocationProps from "../interfaces/allocation_props";
 
 export let browser: Browser;
@@ -52,9 +52,17 @@ function getTodayDate(): string {
 
 async function insertNewRow(page: Page): Promise<void> {
     const menuDocsInsert = await page.$("#docs-insert-menu")
+
+    const value = await page.evaluate(el => el.textContent, menuDocsInsert)
+
     await menuDocsInsert?.click();
     // const insertRow = await page.$("#\\:5e")
-    const insertRow = await page.$('span[aria-label="Row below b"]')
+    let insertRow: ElementHandle<any> | null
+    if (value === "Inserir") {
+        insertRow = await page.$('span[aria-label="Linha abaixo b"]')
+    } else {
+        insertRow = await page.$('span[aria-label="Row below b"]')
+    }
     await insertRow?.click()
 }
 
@@ -68,7 +76,7 @@ async function insertProperties(page: Page, inputText: string): Promise<void> {
         page.close();
         throw new Error()
     }
-    await input?.type(inputText, { delay: 500 });
+    await input?.type(inputText, { delay: 400 });
     await page.keyboard.press("Tab")
 }
 

@@ -7,7 +7,7 @@ export let browser: Browser;
 export async function openBrowser(): Promise<void> {
 
     browser = await launch({
-        headless: true,
+        headless: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -37,7 +37,7 @@ export async function openNewAllocationPage(data: AllocationProps): Promise<void
         }
 
 
-        setTimeout(() => page.close(), 200);
+        setTimeout(() => closeBrowser(), 200);
     }
 }
 
@@ -73,7 +73,7 @@ async function insertProperties(page: Page, inputText: string): Promise<void> {
     await new Promise(resolve => setTimeout(resolve, 200));
     const input = await page.$("#t-formula-bar-input span")
     if (input == null) {
-        page.close();
+        closeBrowser()
         throw new Error()
     }
     await input?.type(inputText, { delay: 400 });

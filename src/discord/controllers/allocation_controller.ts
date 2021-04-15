@@ -8,7 +8,7 @@ export default class AllocationController {
 
 
     async onReady(): Promise<void> {
-        await openBrowser()
+        // await openBrowser()
         console.log("AllocationBot is Online ✅");
     }
 
@@ -117,6 +117,7 @@ export default class AllocationController {
 
 
                 message.reply("Estou adicionando sua alocação, por favor aguarde... ⏳")
+                await openBrowser()
 
                 await openNewAllocationPage(data)
 

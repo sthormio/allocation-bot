@@ -7,7 +7,7 @@ export let browser: Browser;
 export async function openBrowser(): Promise<void> {
 
     browser = await launch({
-        headless: false,
+        headless: true,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',

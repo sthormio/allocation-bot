@@ -10,7 +10,7 @@ try {
     AllocationBot.start();
     const server = express();
     server.listen(process.env.PORT || 3000, () => {
-        pingServer((25 * 60) * 100)
+        // pingServer((25 * 60) * 100)
         readFreeMemory()
 
     })

@@ -22,7 +22,12 @@ export default class AllocationController {
         if (message[0].channel.name === 'routines') {
 
             if (message[0].content == 'out' || message[0].content == 'Out') {
-                message[0].reply("Tenha um bom descanso, nos vemos amanhã 👋🏽")
+                const date = new Date()
+                if (date.getDay() === 5) {
+                    message[0].reply("Tenha um bom fim de semana, nos vemos na segunda 👋🏽")
+                } else {
+                    message[0].reply("Tenha um bom descanso, nos vemos amanhã 👋🏽")
+                }
             } else if (message[0].content == 'back' || message[0].content == 'Back') {
                 message[0].reply("Bem vindo de volta ao trabalho 👊🏼")
             } else if (message[0].content == 'almoço' || message[0].content == 'Almoço') {

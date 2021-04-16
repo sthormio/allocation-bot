@@ -1,7 +1,8 @@
 import { ArgsOf, CommandMessage } from "@typeit/discord";
-import projects from "../../utils/projects";
-import allocationLogoMobile from '../../utils/allocation_logo';
-import { closeBrowser, openBrowser, openNewAllocationPage } from "../../puppetter/puppeteer";
+import projects from "../utils/projects";
+import allocationLogoMobile from '../utils/allocation_logo';
+import { closeBrowser, openBrowser, openNewAllocationPage } from "../puppetter/puppeteer";
+import { InsertAllocation } from '../spreadsheet/spreadshet_actions';
 
 export default class AllocationController {
     constructor() { }
@@ -115,13 +116,14 @@ export default class AllocationController {
             try {
 
 
+                InsertAllocation()
 
-                message.reply("Estou adicionando sua alocação, por favor aguarde... ⏳")
-                await openBrowser()
+                // message.reply("Estou adicionando sua alocação, por favor aguarde... ⏳")
+                // await openBrowser()
 
-                await openNewAllocationPage(data)
+                // await openNewAllocationPage(data)
 
-                message.reply("Sua Alocação foi adicionada 👊🏽")
+                // message.reply("Sua Alocação foi adicionada 👊🏽")
 
             } catch (e) {
                 message.reply("Ocorreu um erro ao adicionar sua alocação 😓, poderia tentar novamente ?")

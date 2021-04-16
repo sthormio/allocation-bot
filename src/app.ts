@@ -4,14 +4,16 @@ import axios from 'axios';
 import os from 'os';
 dotenv.config();
 import AllocationBot from './discord/discord_connection'
+import SpreadsheetConnection from './spreadsheet/spreadsheet_connection'
 
 
 try {
+    SpreadsheetConnection.start();
     AllocationBot.start();
     const server = express();
     server.listen(process.env.PORT || 3000, () => {
         // pingServer((25 * 60) * 100)
-        readFreeMemory()
+        // readFreeMemory()
 
     })
 
@@ -20,7 +22,7 @@ try {
     })
 
 } catch (error) {
-    console.log("Não foi possivel conectar ao discord")
+    console.log("Não foi possivel conectar à aplicação")
 }
 
 async function pingServer(ms: number) {

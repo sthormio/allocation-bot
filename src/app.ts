@@ -8,7 +8,7 @@ import SpreadsheetConnection from './spreadsheet/spreadsheet_connection'
 
 
 try {
-    SpreadsheetConnection.start();
+    SpreadsheetConnection.start()
     AllocationBot.start();
     const server = express();
     server.listen(process.env.PORT || 3000, () => {

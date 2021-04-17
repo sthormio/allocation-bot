@@ -120,17 +120,15 @@ export default class AllocationController {
 
             try {
 
+                message.reply("Estou adicionando sua alocação, por favor aguarde... ⏳")
 
-                InsertAllocation()
+                await InsertAllocation(data)
 
-                // message.reply("Estou adicionando sua alocação, por favor aguarde... ⏳")
-                // await openBrowser()
-
-                // await openNewAllocationPage(data)
-
-                // message.reply("Sua Alocação foi adicionada 👊🏽")
+                message.reply("Sua Alocação foi adicionada 👊🏽")
 
             } catch (e) {
+                console.log(e)
+
                 message.reply("Ocorreu um erro ao adicionar sua alocação 😓, poderia tentar novamente ?")
             }
         }

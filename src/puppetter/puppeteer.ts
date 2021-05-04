@@ -37,7 +37,7 @@ export async function openNewAllocationPage(data: AllocationProps): Promise<void
         }
 
 
-        setTimeout(() => closeBrowser(), 200);
+        setTimeout(() => page.close(), 200);
     }
 }
 

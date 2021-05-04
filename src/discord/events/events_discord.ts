@@ -14,6 +14,7 @@ abstract class AllocationBotEvents {
     @On("ready")
     onReady(): void {
         this.allocationController.onReady();
+        openBrowser()
     }
 
     @On("disconnect")

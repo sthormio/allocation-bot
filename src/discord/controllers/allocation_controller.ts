@@ -114,10 +114,7 @@ export default class AllocationController {
 
             try {
 
-
-
                 message.reply("Estou adicionando sua alocação, por favor aguarde... ⏳")
-                await openBrowser()
 
                 await openNewAllocationPage(data)
 

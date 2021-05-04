@@ -11,7 +11,7 @@ try {
     const server = express();
     server.listen(process.env.PORT || 3000, () => {
         // pingServer((25 * 60) * 100)
-        readFreeMemory()
+        // readFreeMemory()
 
     })
 

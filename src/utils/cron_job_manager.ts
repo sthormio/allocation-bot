@@ -1,10 +1,11 @@
 import { ScheduledTask, schedule } from 'node-cron';
 import sortAlocationPage from './sort_page';
+import checkAlocation from './check_alocation';
 
 
 class CronJobManager {
 
-    private jobs: [ScheduledTask];
+    private jobs: ScheduledTask[];
 
     constructor() {
         this.jobs = [sortAlocationPage];

@@ -6,5 +6,5 @@ function sortAlocationPage() {
     sortPage();
 }
 
-export default schedule('0 0 18 * * MON,TUE,WED,THU,FRI *', sortAlocationPage, { scheduled: false });;
+export default schedule('0 0 18 * * MON,TUE,WED,THU,FRI *', sortAlocationPage, { scheduled: false });
 

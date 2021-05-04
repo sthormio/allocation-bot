@@ -1,7 +1,6 @@
 import { GoogleSpreadsheet, ServiceAccountCredentials } from 'google-spreadsheet';
 import * as credentials from '../../credentials.json';
 
-
 class SpreadsheetConnection {
 
     private _spreadSheet: GoogleSpreadsheet;

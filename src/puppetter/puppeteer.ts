@@ -1,5 +1,6 @@
 import { Browser, ElementHandle, launch, Page } from "puppeteer";
 import AllocationProps from "../interfaces/allocation_props";
+import { getTodayDate } from "../utils/get_today";
 
 export let browser: Browser;
 
@@ -7,7 +8,7 @@ export let browser: Browser;
 export async function openBrowser(): Promise<void> {
 
     browser = await launch({
-        headless: false,
+        headless: true,
 
         args: [
             '--no-sandbox',
@@ -22,34 +23,41 @@ export async function closeBrowser(): Promise<void> {
 }
 
 export async function sortPage() {
-    await openBrowser();
+    try {
+        await openBrowser();
 
-    let sortOption: ElementHandle<any> | null;
 
-    const page = await browser.newPage();
-    page.setViewport({
-        width: 1368,
-        height: 720
-    })
-    await page.goto(process.env.ALLOCATION_URL || "ALOCATION");
+        const page = await browser.newPage();
+        page.setViewport({
+            width: 1368,
+            height: 720
+        })
+        await page.goto(process.env.ALLOCATION_URL || "ALOCATION");
 
-    await page.keyboard.press("Tab")
+        await page.keyboard.press("Tab")
 
-    const dataMenu = await page.$("#trix-data-menu")
+        const dataMenu = await page.$("#trix-data-menu")
 
-    const value = await page.evaluate(el => el.textContent, dataMenu)
+        const value = await page.evaluate(el => el.textContent, dataMenu)
 
-    await dataMenu?.click()
+        await dataMenu?.click()
 
-    if (value === "Data") {
-        sortOption = await page.$('span[aria-label="Sort sheet by column B, Z → A z"]')
-    } else {
-        sortOption = await page.$('span[aria-label="Classificar página por coluna B, Z → A z"]')
+        if (value === "Data") {
+            await page.waitForSelector('span[aria-label="Sort sheet by column B, Z → A z"]');
+            const classfify = await page.$('span[aria-label="Sort sheet by column B, Z → A z"]')
+            await classfify?.click();
+        } else {
+            await page.waitForSelector('span[aria-label="Classificar página por coluna B, Z → A z"]');
+            const classfify = await page.$('span[aria-label="Classificar página por coluna B, Z → A z"]')
+            await classfify?.click();
+        }
+
+        setTimeout(() => closeBrowser(), 700);
+
+    } catch (error) {
+        console.log(error)
+        // sortPage();
     }
-
-    await sortOption?.click()
-
-    // closeBrowser()
 }
 
 export async function openNewAllocationPage(data: AllocationProps): Promise<void> {
@@ -74,14 +82,7 @@ export async function openNewAllocationPage(data: AllocationProps): Promise<void
     }
 }
 
-function getTodayDate(): string {
-    let today = "";
-    const date = new Date();
 
-    today = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
-
-    return today
-}
 
 async function insertNewRow(page: Page): Promise<void> {
     const menuDocsInsert = await page.$("#docs-insert-menu")

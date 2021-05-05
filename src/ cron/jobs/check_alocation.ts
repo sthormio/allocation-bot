@@ -1,10 +1,10 @@
 import { schedule } from 'node-cron';
-import { checkAlocation } from '../../utils/users';
+import { usersAlocation } from '../../utils/users';
 import AllocationBot from '../../discord/discord_connection';
 
 function checkIfUserWasAlocated() {
-    checkAlocation.users.forEach(user => {
-        if (checkAlocation.usersAlocated.includes(user)) {
+    usersAlocation.users.forEach(user => {
+        if (usersAlocation.usersAlocated.includes(user)) {
             console.log("Já Alocou")
 
         } else {

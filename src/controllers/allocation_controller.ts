@@ -3,7 +3,8 @@ import projects from "../utils/projects";
 import allocationLogoMobile from '../utils/allocation_logo';
 import { closeBrowser } from "../puppetter/puppeteer";
 import { InsertAllocation } from '../spreadsheet/spreadshet_actions';
-import { checkAlocation } from "../utils/users";
+import { usersAlocation } from "../utils/users";
+import { GuildMember } from "discord.js";
 
 export default class AllocationController {
     constructor() { }
@@ -127,23 +128,9 @@ export default class AllocationController {
 
                 message.reply("Sua Alocação foi adicionada 👊🏽")
 
-                if (checkAlocation.usersAlocated.length == 0) {
-                    checkAlocation.usersAlocated.push({
-                        id: member?.id as string,
-                        name: member?.displayName as string,
-                    })
-                } else {
-                    checkAlocation.usersAlocated.forEach(user => {
-                        if (user?.id != member?.id) {
-                            checkAlocation.usersAlocated.push({
-                                id: member?.id as string,
-                                name: member?.displayName as string,
-                            })
-                        }
-                    })
-                }
+                this.addToAllocatedUsers(member);
 
-                console.log(checkAlocation.usersAlocated)
+                console.log(usersAlocation.usersAlocated)
 
             } catch (e) {
                 console.log(e)
@@ -178,6 +165,24 @@ export default class AllocationController {
             return false;
         } else {
             return true;
+        }
+    }
+
+    private addToAllocatedUsers(member: GuildMember | null | undefined) {
+        if (usersAlocation.usersAlocated.length == 0) {
+            usersAlocation.usersAlocated.push({
+                id: member?.id as string,
+                name: member?.displayName as string,
+            })
+        } else {
+            usersAlocation.usersAlocated.forEach(user => {
+                if (user?.id != member?.id) {
+                    usersAlocation.usersAlocated.push({
+                        id: member?.id as string,
+                        name: member?.displayName as string,
+                    })
+                }
+            })
         }
     }
 

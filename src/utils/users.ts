@@ -22,7 +22,7 @@ export const users: UserProps[] = [
     { id: "383062725254709248", name: "Sywrah Gabriella" },
 ]
 
-export const checkAlocation: checkAlocationProps = {
+export const usersAlocation: checkAlocationProps = {
     users: [...users],
     usersAlocated: [],
 }

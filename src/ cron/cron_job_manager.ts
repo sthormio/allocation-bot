@@ -1,6 +1,6 @@
 import { ScheduledTask, schedule } from 'node-cron';
-import sortAlocationPage from './sort_page';
-import checkAlocation from './check_alocation';
+import sortAlocationPage from './jobs/sort_page';
+import checkAlocation from './jobs/check_alocation';
 
 
 class CronJobManager {

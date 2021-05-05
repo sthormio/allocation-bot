@@ -4,7 +4,7 @@ import os from 'os';
 dotenv.config();
 import AllocationBot from './discord/discord_connection';
 import SpreadsheetConnection from './spreadsheet/spreadsheet_connection';
-import CronJobManager from './utils/cron_job_manager';
+import CronJobManager from './ cron/cron_job_manager';
 
 
 try {
@@ -22,16 +22,4 @@ try {
 
 } catch (error) {
     console.log("Não foi possivel conectar à aplicação")
-}
-
-function readFreeMemory() {
-    setTimeout(async () => {
-        console.log(`Free memory: ${(os.freemem() / (1024 * 1024)).toFixed(2)} MB`)
-        console.log(`Used memory: ${(((os.totalmem() - os.freemem()) / (1024 * 1024))).toFixed(2)} MB`)
-        readFreeMemory()
-    }, 10000)
-}
-
-function CronJobSortAlocationSpreadSheet() {
-    throw new Error('Function not implemented.');
 }

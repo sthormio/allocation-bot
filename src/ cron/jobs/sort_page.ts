@@ -1,5 +1,5 @@
 import { schedule } from 'node-cron';
-import { sortPage } from '../puppetter/puppeteer'
+import { sortPage } from '../../puppetter/puppeteer'
 
 function sortAlocationPage() {
     console.log("Sort alocation page")

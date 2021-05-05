@@ -1,8 +1,9 @@
 import { ArgsOf, CommandMessage } from "@typeit/discord";
 import projects from "../utils/projects";
 import allocationLogoMobile from '../utils/allocation_logo';
-import { closeBrowser, openBrowser, openNewAllocationPage } from "../puppetter/puppeteer";
+import { closeBrowser } from "../puppetter/puppeteer";
 import { InsertAllocation } from '../spreadsheet/spreadshet_actions';
+import { checkAlocation } from "../utils/users";
 
 export default class AllocationController {
     constructor() { }
@@ -125,6 +126,24 @@ export default class AllocationController {
                 await InsertAllocation(data)
 
                 message.reply("Sua Alocação foi adicionada 👊🏽")
+
+                if (checkAlocation.usersAlocated.length == 0) {
+                    checkAlocation.usersAlocated.push({
+                        id: member?.id as string,
+                        name: member?.displayName as string,
+                    })
+                } else {
+                    checkAlocation.usersAlocated.forEach(user => {
+                        if (user?.id != member?.id) {
+                            checkAlocation.usersAlocated.push({
+                                id: member?.id as string,
+                                name: member?.displayName as string,
+                            })
+                        }
+                    })
+                }
+
+                console.log(checkAlocation.usersAlocated)
 
             } catch (e) {
                 console.log(e)

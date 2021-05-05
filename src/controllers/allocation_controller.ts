@@ -169,21 +169,10 @@ export default class AllocationController {
     }
 
     private addToAllocatedUsers(member: GuildMember | null | undefined) {
-        if (usersAlocation.usersAlocated.length == 0) {
-            usersAlocation.usersAlocated.push({
-                id: member?.id as string,
-                name: member?.displayName as string,
-            })
-        } else {
-            usersAlocation.usersAlocated.forEach(user => {
-                if (user?.id != member?.id) {
-                    usersAlocation.usersAlocated.push({
-                        id: member?.id as string,
-                        name: member?.displayName as string,
-                    })
-                }
-            })
-        }
+        usersAlocation.usersAlocated.push({
+            id: member?.id as string,
+            name: member?.displayName as string,
+        })
     }
 
 }

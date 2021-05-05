@@ -13,4 +13,4 @@ function checkIfUserWasAlocated() {
     })
 }
 
-export default schedule('0 0 17 * * MON,TUE,WED,THU,FRI *', checkIfUserWasAlocated, { scheduled: false });
+export default schedule('0 0 17 * * MON,TUE,WED,THU,FRI *', checkIfUserWasAlocated, { scheduled: false, timezone: 'America/Sao_Paulo' });

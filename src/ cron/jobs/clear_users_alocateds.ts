@@ -7,4 +7,4 @@ function clearUsersAlocateds() {
     console.log(`Total de usuários alocados ${usersAlocation.usersAlocated.length}`)
 }
 
-export default schedule('0 59 23 * * MON,TUE,WED,THU,FRI *', clearUsersAlocateds, { scheduled: false });
+export default schedule('0 59 23 * * MON,TUE,WED,THU,FRI *', clearUsersAlocateds, { scheduled: false, timezone: 'America/Sao_Paulo' });

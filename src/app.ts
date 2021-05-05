@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import os from 'os';
 dotenv.config();
 import AllocationBot from './discord/discord_connection';
 import SpreadsheetConnection from './spreadsheet/spreadsheet_connection';

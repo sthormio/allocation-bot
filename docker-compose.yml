@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+    app:
+        build: .
+        restart: always
+        container_name: alocation_bot
+        ports:
+            - "3000:3000"
+        env_file:
+            - .env
+        environment:
+            TOKEN: "${TOKEN}"
+            ALLOCATION_URL: "${ALLOCATION_URL}"
+            ALLOCATION_ID: "${ALLOCATION_ID}"
+            CLIENT_EMAIL: "${CLIENT_EMAIL}"
+            PRIVATE_KEY: "${PRIVATE_KEY}"
+        command: npm start
+        logging: 
+            driver: "json-file"
+            options: 
+                max-size: "10m"
+                max-file: "5"

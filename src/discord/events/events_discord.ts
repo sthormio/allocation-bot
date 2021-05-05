@@ -1,10 +1,7 @@
 
 import { ArgsOf, CommandMessage } from '@typeit/discord';
 import { Command, CommandNotFound, Discord, On } from '@typeit/discord/decorators';
-import { openBrowser, closeBrowser, } from '../../puppetter/puppeteer';
-import AllocationLogo from '../../utils/allocation_logo';
-import projects from '../../utils/projects';
-import AllocationController from '../controllers/allocation_controller'
+import AllocationController from '../../controllers/allocation_controller'
 
 @Discord("!")
 abstract class AllocationBotEvents {
@@ -14,7 +11,6 @@ abstract class AllocationBotEvents {
     @On("ready")
     onReady(): void {
         this.allocationController.onReady();
-        openBrowser()
     }
 
     @On("disconnect")

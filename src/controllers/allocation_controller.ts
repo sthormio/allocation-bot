@@ -1,7 +1,10 @@
 import { ArgsOf, CommandMessage } from "@typeit/discord";
-import projects from "../../utils/projects";
-import allocationLogoMobile from '../../utils/allocation_logo';
-import { closeBrowser, openBrowser, openNewAllocationPage } from "../../puppetter/puppeteer";
+import projects from "../utils/projects";
+import allocationLogoMobile from '../utils/allocation_logo';
+import { closeBrowser } from "../puppetter/puppeteer";
+import { InsertAllocation } from '../spreadsheet/spreadshet_actions';
+import { usersAlocation } from "../utils/users";
+import { GuildMember } from "discord.js";
 
 export default class AllocationController {
     constructor() { }
@@ -21,7 +24,12 @@ export default class AllocationController {
         if (message[0].channel.name === 'routines') {
 
             if (message[0].content == 'out' || message[0].content == 'Out') {
-                message[0].reply("Tenha um bom descanso, nos vemos amanhã 👋🏽")
+                const date = new Date()
+                if (date.getDay() === 5) {
+                    message[0].reply("Tenha um bom fim de semana, nos vemos na segunda 👋🏽")
+                } else {
+                    message[0].reply("Tenha um bom descanso, nos vemos amanhã 👋🏽")
+                }
             } else if (message[0].content == 'back' || message[0].content == 'Back') {
                 message[0].reply("Bem vindo de volta ao trabalho 👊🏼")
             } else if (message[0].content == 'almoço' || message[0].content == 'Almoço') {
@@ -116,11 +124,17 @@ export default class AllocationController {
 
                 message.reply("Estou adicionando sua alocação, por favor aguarde... ⏳")
 
-                await openNewAllocationPage(data)
+                await InsertAllocation(data)
 
                 message.reply("Sua Alocação foi adicionada 👊🏽")
 
+                this.addToAllocatedUsers(member);
+
+                console.log(usersAlocation.usersAlocated)
+
             } catch (e) {
+                console.log(e)
+
                 message.reply("Ocorreu um erro ao adicionar sua alocação 😓, poderia tentar novamente ?")
             }
         }
@@ -151,6 +165,24 @@ export default class AllocationController {
             return false;
         } else {
             return true;
+        }
+    }
+
+    private addToAllocatedUsers(member: GuildMember | null | undefined) {
+        if (usersAlocation.usersAlocated.length == 0) {
+            usersAlocation.usersAlocated.push({
+                id: member?.id as string,
+                name: member?.displayName as string,
+            })
+        } else {
+            usersAlocation.usersAlocated.forEach(user => {
+                if (user?.id != member?.id) {
+                    usersAlocation.usersAlocated.push({
+                        id: member?.id as string,
+                        name: member?.displayName as string,
+                    })
+                }
+            })
         }
     }
 

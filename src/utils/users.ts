@@ -20,6 +20,7 @@ export const users: UserProps[] = [
     { id: "227975163369619456", name: "Thiago Ataide" },
     { id: "125180222306910208", name: "Luciano Lemgruber" },
     { id: "383062725254709248", name: "Sywrah Gabriella" },
+    { id: "328020483041787904", name: "Germano Gomes" }
 ]
 
 export const usersAlocation: checkAlocationProps = {

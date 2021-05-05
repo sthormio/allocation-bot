@@ -1,6 +1,5 @@
 import AllocationProps from '../interfaces/allocation_props';
 import SpreadsheetConnection from './spreadsheet_connection';
-import { sortPage } from "../puppetter/puppeteer";
 import { getTodayDate } from '../utils/get_today';
 
 

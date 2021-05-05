@@ -1,26 +1,30 @@
 
 import { ArgsOf, CommandMessage } from '@typeit/discord';
 import { Command, CommandNotFound, Discord, On } from '@typeit/discord/decorators';
-import AllocationController from '../../controllers/allocation_controller'
+import AllocationController from '../../controllers/allocation_controller';
+import DayOffsController from '../../controllers/day_offs_controller';
+import SharedController from '../../controllers/shared_controller';
 
 @Discord("!")
 abstract class AllocationBotEvents {
 
-    allocationController = new AllocationController()
+    allocationController = new AllocationController();
+    dayOffsController = new DayOffsController();
+    sharedController = new SharedController();
 
     @On("ready")
     onReady(): void {
-        this.allocationController.onReady();
+        this.sharedController.onReady();
     }
 
     @On("disconnect")
     onDisconnect(): void {
-        this.allocationController.onDisconnect();
+        this.sharedController.onDisconnect();
     }
 
     @CommandNotFound()
     notFound(message: CommandMessage): void {
-        this.allocationController.notFound(message);
+        this.sharedController.notFound(message);
     }
 
     @Command("projects")
@@ -30,7 +34,7 @@ abstract class AllocationBotEvents {
 
     @Command("help")
     helpCommand(message: CommandMessage): void {
-        this.allocationController.helpCommand(message);
+        this.sharedController.helpCommand(message);
     }
 
     @Command("on")
@@ -38,10 +42,15 @@ abstract class AllocationBotEvents {
         this.allocationController.insertAllocation(message);
     }
 
+    @Command("off")
+    insertDayOff(message: CommandMessage): void {
+        this.dayOffsController.insertDayOffs(message);
+    }
+
     @On('message')
     out(
         message: ArgsOf<"message">,
     ): void {
-        this.allocationController.genericCommands(message);
+        this.sharedController.genericCommands(message);
     }
 }

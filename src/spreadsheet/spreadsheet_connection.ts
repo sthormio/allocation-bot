@@ -29,7 +29,7 @@ class SpreadsheetConnection {
 
             await this._spreadSheet.loadInfo()
 
-            console.log(`Conexão estabelecida com a planilha`)
+            console.log(`Conexão estabelecida com a planilha ✅`)
         } catch (error) {
             console.log(`Erro ao se conectar a planilha ${error}`)
         }

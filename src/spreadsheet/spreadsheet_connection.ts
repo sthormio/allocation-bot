@@ -1,5 +1,4 @@
-import { GoogleSpreadsheet, ServiceAccountCredentials } from 'google-spreadsheet';
-import * as credentials from '../../credentials.json';
+import { GoogleSpreadsheet } from 'google-spreadsheet';
 
 class SpreadsheetConnection {
 

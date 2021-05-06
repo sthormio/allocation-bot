@@ -6,5 +6,5 @@ function sortAlocationPage() {
     sortAllocationPage();
 }
 
-export default schedule('0 50 22 * * MON,TUE,WED,THU,FRI *', sortAlocationPage, { scheduled: false, timezone: 'America/Sao_Paulo' });
+export default schedule('0 0 18 * * MON,TUE,WED,THU,FRI *', sortAlocationPage, { scheduled: false, timezone: 'America/Sao_Paulo' });
 

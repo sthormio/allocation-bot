@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM buildkite/puppeteer
 
 WORKDIR /usr/app
 

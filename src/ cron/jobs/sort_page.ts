@@ -1,10 +1,10 @@
 import { schedule } from 'node-cron';
-import { sortPage } from '../../puppetter/puppeteer'
+import { sortAllocationPage } from '../../puppetter/puppeteer'
 
 function sortAlocationPage() {
     console.log("Sort alocation page")
-    sortPage();
+    sortAllocationPage();
 }
 
-export default schedule('0 0 18 * * MON,TUE,WED,THU,FRI *', sortAlocationPage, { scheduled: false, timezone: 'America/Sao_Paulo' });
+export default schedule('0 50 22 * * MON,TUE,WED,THU,FRI *', sortAlocationPage, { scheduled: false, timezone: 'America/Sao_Paulo' });
 

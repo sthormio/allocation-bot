@@ -20,7 +20,7 @@ export async function closeBrowser(): Promise<void> {
     browser.close();
 }
 
-export async function sortPage() {
+export async function sortAllocationPage() {
     try {
         await openBrowser();
 

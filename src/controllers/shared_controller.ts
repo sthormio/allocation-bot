@@ -1,5 +1,4 @@
 import allocationLogoMobile from '../utils/allocation_logo';
-import { closeBrowser } from "../puppetter/puppeteer";
 import { ArgsOf, CommandMessage } from "@typeit/discord";
 
 
@@ -9,13 +8,11 @@ export default class SharedController {
     }
 
     async onReady(): Promise<void> {
-        // await openBrowser()
         console.log("AllocationBot is Online ✅");
     }
 
     onDisconnect(): void {
         console.log("AllocationBot is Offline ❌")
-        closeBrowser();
     }
 
     genericCommands(

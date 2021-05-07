@@ -16,7 +16,7 @@ export async function InsertAllocation(data: AllocationProps) {
             "Projeto / Funcao": data.project,
             Tempo: data.hours,
             Obs: data.obs ? data.obs : ""
-        }
+        },
     )
 }
 

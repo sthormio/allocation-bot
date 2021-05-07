@@ -100,6 +100,10 @@ export default class AllocationController {
     }
 
     private addToAllocatedUsers(member: GuildMember | null | undefined) {
+        const hasAlreadyExists = usersAlocation.usersAlocated.find(user => user.id == member?.id);
+        if (hasAlreadyExists) {
+            return;
+        }
         usersAlocation.usersAlocated.push({
             id: member?.id as string,
             name: member?.displayName as string,

@@ -7,13 +7,20 @@ export default class AllocationBot {
         return this._client;
     }
 
-    static start(): void {
-        this._client = new Client();
+    static async start(): Promise<boolean> {
+        try {
+            this._client = new Client();
 
-        this._client.login(
-            process.env.TOKEN || "TOKEN",
-            `${__dirname}/events/*.ts`,
-            `${__dirname}/events/*.js`,
-        );
+            await this._client.login(
+                process.env.TOKEN || "TOKEN",
+                `${__dirname}/events/*.ts`,
+                `${__dirname}/events/*.js`,
+            );
+            return true;
+        } catch (error) {
+            console.log(error)
+            console.log("Error ao logar no discord bot ❌")
+            return false;
+        }
     }
 }

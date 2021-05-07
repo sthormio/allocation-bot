@@ -1,30 +1,12 @@
 import { CommandMessage } from "@typeit/discord";
-import projects from "../../utils/projects";
-import allocationLogoMobile from '../../utils/allocation_logo';
-import { closeBrowser, openBrowser, openNewAllocationPage } from "../../puppetter/puppeteer";
+import projects from "../utils/projects";
+import { InsertAllocation } from '../spreadsheet/spreadshet_actions';
+import { usersAlocation } from "../utils/users";
+import { GuildMember } from "discord.js";
+import { useSplitWhenHasFlags } from "../utils/functions";
 
 export default class AllocationController {
     constructor() { }
-
-
-    async onReady(): Promise<void> {
-        await openBrowser()
-        console.log("AllocationBot is Online ✅");
-    }
-
-
-    onDisconnect(): void {
-        console.log("AllocationBot is Offline ❌")
-        closeBrowser();
-    }
-
-
-    public notFound(message: CommandMessage): void {
-        if (message.author.bot) return;
-        if (message.channel.type === "dm") return;
-        message.reply("Este comando não foi encontrado 😓. Digite !help para ver os comandos disponíveis")
-    }
-
 
     public listProjects(message: CommandMessage) {
         if (message.author.bot) return;
@@ -34,21 +16,6 @@ export default class AllocationController {
 
     }
 
-
-    public helpCommand(message: CommandMessage): void {
-        if (message.author.bot) return;
-        if (message.channel.type === "dm") return;
-        message.channel.send(allocationLogoMobile())
-        message.channel.send(
-            `📝 COMMANDS:
-             ✅ !on + project + hours => Adicionar sua alocação
-             ✅ !projects => Listar todos os projetos para alocação
-             ✅ !help => Descrição de todos os comandos
-
-        `)
-    }
-
-
     public async insertAllocation(message: CommandMessage): Promise<void> {
 
         if (message.author.bot) return;
@@ -56,62 +23,61 @@ export default class AllocationController {
 
         if (message.channel.name === "routines") {
 
+            const [content, FlagContent] = useSplitWhenHasFlags(message.content, "--obs");
 
-            const rawContent = message.content.split("--obs")
-            const content = rawContent[0].split(" ")
-
-            if (message.content.includes('--obs')) {
-                content.pop();
-            }
-
-
-            if (this.validateFieldsLenght(content)) {
+            if (this.validateFieldsLenght(content as string[])) {
                 message.reply("Informe o projeto e as horas (separadas por espaço) para adicionar sua alocação. Ex: !on Artbit 8")
                 return;
             }
 
-            if (this.validateProjects(content[1])) {
+            if (this.validateProjects(content[0])) {
                 message.reply(`Escolha um dos projetos listados: 📝${projects.map(project => `\n${project}`)}`)
                 return;
             }
 
-            if (this.validateNumbersOfHours(content[2])) {
+            if (this.validateNumbersOfHours(content[1])) {
                 message.reply("Informe o números de horas entre 1 e 8")
                 return;
             }
 
-
             let member = message.guild?.member(message.author);
 
+            console.log(member?.displayName);
 
             console.log(member?.displayName);
 
             const data = {
                 "username": member?.displayName as string,
-                "project": content[1],
-                "hours": content[2],
-                "obs": rawContent.length === 2 ? rawContent[1].trim() : false,
+                "project": content[0],
+                "hours": content[1],
+                "obs": FlagContent == null ? false : (FlagContent as string).trim(),
             }
 
             try {
 
                 message.reply("Estou adicionando sua alocação, por favor aguarde... ⏳")
 
-                await openNewAllocationPage(data)
+                await InsertAllocation(data)
 
-                message.reply("Sua Alocaçao foi adicionada 👊🏽")
+                message.reply("Sua Alocação foi adicionada 👊🏽")
+
+                this.addToAllocatedUsers(member);
+
+                console.log(usersAlocation.usersAlocated)
 
             } catch (e) {
+                console.log(e)
+
                 message.reply("Ocorreu um erro ao adicionar sua alocação 😓, poderia tentar novamente ?")
             }
         }
     }
 
     private validateFieldsLenght(content: string[]): boolean {
-        if ((content.length <= 1 || content.length <= 2)) {
-            return true;
-        } else {
+        if ((content.length == 2)) {
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -131,4 +97,14 @@ export default class AllocationController {
         }
     }
 
+    private addToAllocatedUsers(member: GuildMember | null | undefined) {
+        const hasAlreadyExists = usersAlocation.usersAlocated.find(user => user.id == member?.id);
+        if (hasAlreadyExists) {
+            return;
+        }
+        usersAlocation.usersAlocated.push({
+            id: member?.id as string,
+            name: member?.displayName as string,
+        })
+    }
 }

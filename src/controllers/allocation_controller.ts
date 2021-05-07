@@ -8,8 +8,6 @@ import { useSplitWhenHasFlags } from "../utils/functions";
 export default class AllocationController {
     constructor() { }
 
-
-
     public listProjects(message: CommandMessage) {
         if (message.author.bot) return;
         if (message.channel.type === "dm") return;

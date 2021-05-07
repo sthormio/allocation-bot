@@ -42,9 +42,9 @@ export default class AllocationController {
 
             let member = message.guild?.member(message.author);
 
-
             console.log(member?.displayName);
 
+            console.log(member?.displayName);
 
             const data = {
                 "username": member?.displayName as string,

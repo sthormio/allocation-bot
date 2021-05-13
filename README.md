@@ -11,7 +11,7 @@
 
 <h1 align="center" >Allocation Bot<h1/>
 
-##### This a bot has a goal of the to help the developers team at Sthorm to allocate your work hours using commands on Discord
+##### This a bot has a goal of the to help the developers team at [Sthorm](https://sthorm.io/) to allocate your work hours using commands on Discord
 
 ## Available Commands
 
@@ -31,3 +31,7 @@
  - Discord API
  - Docker
 ```
+
+## Features coming soon
+
+ - Soon we have a front end to explore the visual way all allocations of the developers

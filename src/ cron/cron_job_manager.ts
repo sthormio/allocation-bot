@@ -1,6 +1,6 @@
 import { ScheduledTask } from 'node-cron';
-import checkAlocation from './jobs/check_alocation';
-import clearUsersAlocateds from './jobs/clear_users_alocateds';
+import checkAllocation from './jobs/check_allocation';
+import clearUsersAllocated from './jobs/clear_users_allocated';
 
 
 class CronJobManager {
@@ -9,8 +9,8 @@ class CronJobManager {
 
     constructor() {
         this.jobs = [
-            checkAlocation,
-            clearUsersAlocateds,
+            checkAllocation,
+            clearUsersAllocated,
         ];
     }
 

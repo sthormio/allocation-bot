@@ -1,7 +1,7 @@
 import { CommandMessage } from "@typeit/discord";
 import projects from "../utils/projects";
-import { InsertAllocation } from '../spreadsheet/spreadshet_actions';
-import { usersAlocation } from "../utils/users";
+import { InsertAllocation } from '../spreadsheet/spreadsheet_actions';
+import { usersAllocation } from "../utils/users";
 import { GuildMember } from "discord.js";
 import { useSplitWhenHasFlags } from "../utils/functions";
 
@@ -25,7 +25,7 @@ export default class AllocationController {
 
             const [content, FlagContent] = useSplitWhenHasFlags(message.content, "--obs");
 
-            if (this.validateFieldsLenght(content as string[])) {
+            if (this.validateFieldsLength(content as string[])) {
                 message.reply("Informe o projeto e as horas (separadas por espaço) para adicionar sua alocação. Ex: !on Artbit 8")
                 return;
             }
@@ -63,7 +63,7 @@ export default class AllocationController {
 
                 this.addToAllocatedUsers(member);
 
-                console.log(usersAlocation.usersAlocated)
+                console.log(usersAllocation.usersAllocated)
 
             } catch (e) {
                 console.log(e)
@@ -73,7 +73,7 @@ export default class AllocationController {
         }
     }
 
-    private validateFieldsLenght(content: string[]): boolean {
+    private validateFieldsLength(content: string[]): boolean {
         if ((content.length == 2)) {
             return false;
         } else {
@@ -98,11 +98,11 @@ export default class AllocationController {
     }
 
     private addToAllocatedUsers(member: GuildMember | null | undefined) {
-        const hasAlreadyExists = usersAlocation.usersAlocated.find(user => user.id == member?.id);
+        const hasAlreadyExists = usersAllocation.usersAllocated.find(user => user.id == member?.id);
         if (hasAlreadyExists) {
             return;
         }
-        usersAlocation.usersAlocated.push({
+        usersAllocation.usersAllocated.push({
             id: member?.id as string,
             name: member?.displayName as string,
         })

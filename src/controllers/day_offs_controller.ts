@@ -1,5 +1,5 @@
-import { ArgsOf, CommandMessage } from "@typeit/discord";
-import { InsertDayOff } from '../spreadsheet/spreadshet_actions';
+import { CommandMessage } from "@typeit/discord";
+import { InsertDayOff } from '../spreadsheet/spreadsheet_actions';
 import { useSplitWhenHasFlags } from '../utils/functions';
 
 

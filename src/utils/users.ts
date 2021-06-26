@@ -3,9 +3,9 @@ interface UserProps {
     name: string,
 }
 
-interface checkAlocationProps {
+interface checkAllocationProps {
     users: UserProps[],
-    usersAlocated: UserProps[],
+    usersAllocated: UserProps[],
 }
 
 export const users: UserProps[] = [
@@ -23,7 +23,7 @@ export const users: UserProps[] = [
     { id: "328020483041787904", name: "Germano Gomes" }
 ]
 
-export const usersAlocation: checkAlocationProps = {
+export const usersAllocation: checkAllocationProps = {
     users: [...users],
-    usersAlocated: [],
+    usersAllocated: [],
 }

@@ -10,7 +10,6 @@ interface checkAllocationProps {
 
 export const users: UserProps[] = [
     { id: "287257435830353922", name: "Bruno Alves" },
-    { id: "373874655334760458", name: "Fabiano Santana" },
     { id: "173826954087104512", name: "Lucas Machado" },
     { id: "788044070801899541", name: "Renee Vella" },
     { id: "288037716157923329", name: "Alexandre Tolstenko" },
@@ -20,7 +19,10 @@ export const users: UserProps[] = [
     { id: "227975163369619456", name: "Thiago Ataide" },
     { id: "125180222306910208", name: "Luciano Lemgruber" },
     { id: "383062725254709248", name: "Sywrah Gabriella" },
-    { id: "328020483041787904", name: "Germano Gomes" }
+    { id: "328020483041787904", name: "Germano Gomes" },
+    { id: "479328737477918721", name: "Tobias" },
+    { id: "841374113956495422", name: "Lucas Mendes" }
+
 ]
 
 export const usersAllocation: checkAllocationProps = {

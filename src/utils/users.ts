@@ -21,7 +21,8 @@ export const users: UserProps[] = [
     { id: "383062725254709248", name: "Sywrah Gabriella" },
     { id: "328020483041787904", name: "Germano Gomes" },
     { id: "479328737477918721", name: "Tobias" },
-    { id: "841374113956495422", name: "Lucas Mendes" }
+    { id: "841374113956495422", name: "Lucas Mendes" },
+    { id: "630839620296245258", name: "Milton" }
 
 ]
 

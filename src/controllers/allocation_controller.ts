@@ -21,7 +21,7 @@ export default class AllocationController {
         if (message.author.bot) return;
         if (message.channel.type === "dm") return;
 
-        if (message.channel.name === "routines") {
+        if (message.channel.name === "routines" || message.channel.name === "gps-rotinas") {
 
             const [content, FlagContent] = useSplitWhenHasFlags(message.content, "--obs");
 
